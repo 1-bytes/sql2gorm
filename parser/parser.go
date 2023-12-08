@@ -2,11 +2,11 @@ package parser
 
 import (
 	"fmt"
-	"github.com/jinzhu/inflection"
 	"github.com/blastrain/vitess-sqlparser/tidbparser/ast"
 	"github.com/blastrain/vitess-sqlparser/tidbparser/dependency/mysql"
 	"github.com/blastrain/vitess-sqlparser/tidbparser/dependency/types"
 	"github.com/blastrain/vitess-sqlparser/tidbparser/parser"
+	"github.com/jinzhu/inflection"
 	"github.com/pkg/errors"
 	"go/format"
 	"io"
@@ -248,6 +248,8 @@ func mysqlToGoType(colTp *types.FieldType, style NullStyle) (name string, path s
 			name = "sql.NullString"
 		case mysql.TypeJSON:
 			name = "sql.NullString"
+		case mysql.TypeEnum:
+			name = "sql.NullString"
 		default:
 			return "UnSupport", ""
 		}
@@ -276,6 +278,8 @@ func mysqlToGoType(colTp *types.FieldType, style NullStyle) (name string, path s
 		case mysql.TypeDecimal, mysql.TypeNewDecimal:
 			name = "string"
 		case mysql.TypeJSON:
+			name = "string"
+		case mysql.TypeEnum:
 			name = "string"
 		default:
 			return "UnSupport", ""

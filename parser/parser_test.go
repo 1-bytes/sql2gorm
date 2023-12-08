@@ -48,6 +48,10 @@ var testData = [][]string{
 		"CREATE TABLE information (comment LONGTEXT);",
 		"Comment string `gorm:\"column:comment\"`", "",
 	},
+	{
+		"CREATE TABLE information (status enum('y','n') NOT NULL DEFAULT 'y');",
+		"Status string `gorm:\"column:status;default:y;NOT NULL\"`", "",
+	},
 }
 
 func TestParseSql(t *testing.T) {
